@@ -12,6 +12,7 @@ public class Example15 {
         int num3 = Math.abs(num1 - num2);
         System.out.println("Сумма " + (num1 + num2));
         System.out.println("Разность " + num3);
+        in.close();
     }
 }
 //Напишите программу, в которой Пользователь вводит два числа, а
