@@ -11,6 +11,7 @@ public class Example4 {
         int num2 = in.nextInt();
         int size = 0;
 
+        //Проверяем, какое число больше и считаем размер массива
         if (num1 > num2){
             size = num1 - num2 + 1;
         } else if (num1 == num2){
@@ -19,6 +20,7 @@ public class Example4 {
             size = num2 - num1 + 1;
         }
 
+        //Создаём и наполняем массив числами
         int[] nums = new int[size];
         for (int i = 0; i < nums.length; i++){
             nums[0] = Math.min(num1, num2);
@@ -27,6 +29,7 @@ public class Example4 {
                 nums[i] = nums[i-1] + 1;
             }
         }
+        //Красиво выводим числа массива по порядку и без пробела в конце
         for (int i = 0; i < nums.length; i++){
             if (i == nums.length - 1) {
                 System.out.print(nums[i]);
