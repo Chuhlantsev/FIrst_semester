@@ -1,18 +1,30 @@
 package lr3;
 
+import java.util.Arrays;
 public class Example7 {
     public static void main(String[] args) {
-        int[] abc = new int[10];
+        char[] chars = new char[10]; //Создание основного массива с буквами
+        int j = 0; //Итератор 2-го уровня для работы с символами
 
-        for (int i = 1; i < abc.length; i++){
-            for (char c = 'а'; c <= 'я'; c++) {
-                if (i % 2 == 1) {
-                    System.out.print(c + " ");
+        //Наполнение массива буквами
+        for (int i = 0; i < chars.length; i++) {
+            for (char ch = 'а'; ch <= 'я'; ch++) {
+                if (j % 2 == 0) {
+                    chars[i] = ch;
+                    j++;
                     i++;
-                } else {i++;}
+                    if (i == chars.length) {break;}
+                } else {j++;}
             }
         }
+        System.out.println(Arrays.toString(chars)); //Выводим массив букв
+        char[] charsReverse = new char[chars.length];
 
+        //Создаём копию массива для переворота
+        for (int i = 0; i < chars.length; i++){
+            charsReverse[chars.length - 1 - i] = chars[i];
+        }
+        System.out.println(Arrays.toString(charsReverse)); //Выводим перевёрнутый массив букв
     }
 }
 
