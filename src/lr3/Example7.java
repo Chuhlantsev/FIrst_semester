@@ -18,9 +18,9 @@ public class Example7 {
             }
         }
         System.out.println(Arrays.toString(chars)); //Выводим массив букв
-        char[] charsReverse = new char[chars.length];
+        char[] charsReverse = new char[chars.length]; //Создаём копию массива для переворота
 
-        //Создаём копию массива для переворота
+        //Наполняем перевёрнутый массив
         for (int i = 0; i < chars.length; i++){
             charsReverse[chars.length - 1 - i] = chars[i];
         }
@@ -32,4 +32,3 @@ public class Example7 {
 //Массив заполняется буквами «через одну», начиная с буквы ' а ':
 //то есть массив заполняется буквами 'а', 'с', ' е', 'д' и так далее.
 //Отобразите массив в консольном окне в прямом и обратном порядке.
-//Размер массива задается переменной.
