@@ -37,7 +37,7 @@ public class Example6 {
             copyRow++;
         }
 
-        //Выводим новый массив с указанием удалённой
+        //Выводим новый массив с указанием удалённого контента
         System.out.println("\nКопия массива с удаленной строкой " + (rowToDelete + 1) + " и столбцом " + (colToDelete + 1) + ":");
         for (int i = 0; i < arrayCopy.length; i++){
             for (int j = 0; j < arrayCopy[i].length; j++){
