@@ -1,6 +1,24 @@
 package lr6.Task4;
 
+import java.util.Scanner;
+
 public class Main4 {
+    public static void main(String[] args) {
+        System.out.println("Введите число для вычисления двойного факториала:");
+        Scanner in = new Scanner(System.in);
+        int number = in.nextInt();
+        number = doubleFactorial(number);
+        System.out.println("Двойной факториал = " + number);
+    }
+
+    public static int doubleFactorial(int n){
+        int num = n;
+        for (int i = 0; i <= n; i += 2){
+            num = num * (n - 2);
+            n -= 2;
+        }
+        return num;
+    }
 }
 
 //  Напишите программу, в которой описан статический метод для вычисления двойного
