@@ -1,15 +1,17 @@
-package lr8.example3;
+package lr8.Task1.example3;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
-public class CharStreamExample {
+public class CharStreamExample_console {
     public static void main(String[] args) {
         //Запись данных в файл
         String fileName = "src/lr8/example3/example_file.txt";
-        String data = "Это данные для записи в файл";
+        Scanner in = new Scanner(System.in);
+        String data = in.nextLine();
         try (FileWriter writer = new FileWriter(fileName)) {
             writer.write(data);
             System.out.println("Данные записаны в файл: " + fileName);

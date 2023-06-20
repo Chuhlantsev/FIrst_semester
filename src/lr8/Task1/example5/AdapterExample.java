@@ -1,11 +1,13 @@
-package lr8.example5;
+package lr8.Task1.example5;
 
 import java.io.*;
+import java.util.Arrays;
 
 public class AdapterExample {
     public static void main(String[] args) {
-        String inputFileName = "src/lr8/example5/input.txt";
-        String outputFileName = "src/lr8/example5/output.txt";
+        File folder = new File("src/lr8/Task1/example5");
+        String inputFileName = "src/lr8/Task1/example5/input.txt";
+        String outputFileName = "src/lr8/Task1/example5/output.txt";
         try (InputStream inputStream = new FileInputStream(inputFileName);
             InputStreamReader inputStreamReader =
                     new InputStreamReader(inputStream, "UTF-8");

@@ -1,4 +1,4 @@
-package lr8.example1;
+package lr8.Task1.example1;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.io.IOException;
 public class FileExample {
     public static void main(String[] args) {
         //Создание папки
-        File folder = new File("src/lr8/example1/example_folder");
+        File folder = new File("src/lr8/Task1/example1/example_folder");
         if (!folder.exists()){
             if (folder.mkdir()){
                 System.out.println("Папка создана: " +

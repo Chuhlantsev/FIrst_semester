@@ -17,8 +17,9 @@ public class Main5 {
             System.out.println("Введите количество строк для записи в файл: ");
             int n = in.nextInt();
 
+
             //Создаём поток для записи с учётом типа данных - DataOutputStream,
-            // ему в качетсве аргумента передаётся поток FileOutputStream(file1)
+            // ему в качестве аргумента передаётся поток FileOutputStream(file1)
             DataOutputStream dataOut = new DataOutputStream(new FileOutputStream(file1));
             in.nextLine(); // очистка буфера
             for (int i = 0; i < n; i++){
@@ -28,6 +29,7 @@ public class Main5 {
             }
             dataOut.flush(); //Дописываем данные на диск
             dataOut.close(); //Закрываем поток
+            System.out.println("Размер файла: " + file1.length() + " байт");
             //Чтение и вывод данных из созданного файла
             DataInputStream dataIn = new DataInputStream(new FileInputStream(file1));
             while (true){

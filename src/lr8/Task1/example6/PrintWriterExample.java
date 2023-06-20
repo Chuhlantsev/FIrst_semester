@@ -1,4 +1,4 @@
-package lr8.example6;
+package lr8.Task1.example6;
 
 import java.io.*;
 

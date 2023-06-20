@@ -1,23 +1,24 @@
-package lr8.example4;
+package lr8.Task1.example3;
 
-import java.io.*;
-import java.util.Scanner;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
-public class BufferedStreamExample_console {
+public class CharStreamExample {
     public static void main(String[] args) {
         //Запись данных в файл
-        String fileName = "example_file.txt";
-        Scanner in = new Scanner(System.in);
-        String data = in.nextLine();
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+        String fileName = "src/lr8/example3/example_file.txt";
+        String data = "Это данные для записи в файл";
+        try (FileWriter writer = new FileWriter(fileName)) {
             writer.write(data);
             System.out.println("Данные записаны в файл: " + fileName);
         } catch (IOException e) {
             System.out.println("Ошибка записи в файл: " + e.getMessage());
         }
 
-        //Чтение данных из файла
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+        //Чтение данных аз файла
+        try (FileReader reader = new FileReader(fileName)) {
             char[] buffer = new char[1024];
             int charRead = reader.read(buffer);
             String readData = new String(buffer, 0, charRead);
