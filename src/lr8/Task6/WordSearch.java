@@ -6,17 +6,16 @@ import java.util.Scanner;
 public class WordSearch {
     public static void main(String[] args) {
         File folder = new File("src/lr8/Task6/Тексты");
-        String[] fileList = folder.list();
+        File[] fileList = folder.listFiles();
+        String[] fileListString = folder.list();
 
-        if (fileList.length != 0) {
+        if (fileListString.length != 0) {
             //Выводим список файлов в папке, если они есть
             System.out.println("Список файлов в папке:");
-            int[] numbers = new int[fileList.length];
-            //Цикл для вывода красивого списка файлов
-            for (int i = 0; i < fileList.length; i++) {
-
-                System.out.print(i + 1 + ". ");
-                System.out.print(fileList[i] + "\n");
+            //Цикл для вывода красивого списка файлов + кладём номер п/п в массив
+            for (int i = 0; i < fileListString.length; i++) {
+                fileListString[i] = i + 1 + ". " + fileListString[i];
+                System.out.print(fileListString[i] + "\n");
             }
 
             //Запрашиваем название файла
@@ -25,55 +24,108 @@ public class WordSearch {
             String fileName1 = in.nextLine();
 
             //Находим все подходящие файлы по указанному имени
-            File[] matchingFiles1 = folder.listFiles(new FilenameFilter() {
-                @Override
-                public boolean accept(File dir, String name) {
-                    return name.contains(fileName1);
+            int counter = 0;
+            int numberOfFiles = 0;
+            int finalFileNumber = 0;
+            for (String id : fileListString) {
+                counter++;
+                if (id.contains(fileName1)) {
+                    numberOfFiles++;
+                    finalFileNumber = counter;
                 }
-            });
+            }
+//            Находим все подходящие файлы по указанному имени
+//            File[] matchingFiles1 = folder.listFiles(new FilenameFilter() {
+//                @Override
+//                public boolean accept(File dir, String name) {
+//                    return name.contains(fileName1);
+//                }
+//            });
+            if (numberOfFiles > 1) { //Если нашли несколько - выводим их список
+                System.out.println("Подходящих файлов найдено " + numberOfFiles + " шт:");
+                counter = 0;
+                int matchingFilesCounter = 0;
+                for (String id : fileListString) {
+                    counter++;
+                    if (id.contains(fileName1)) {
+                        System.out.println(fileListString[counter - 1]);
+                        matchingFilesCounter = counter;
+                    }
+                }
 
-            if (matchingFiles1.length == 1){ //Если нашли только один подходящий файл - приступаем к поиску слова
-                System.out.println("Введите слово для поиска: ");
-
-
-
-
-            } else if (matchingFiles1.length > 1) { //Если нашли несколько - выводим их список
                 while (true) {
-                    System.out.println("Подходящих файлов найдено " + matchingFiles1.length + " шт:");
-                    //Выводим красивый список подходящих файлов
-                    for (int i = 0; i < matchingFiles1.length; i++) {
-                        System.out.print(i + 1 + ". ");
-                        System.out.print(matchingFiles1[i] + "\n");
-                    }
+//                    System.out.println("Подходящих файлов найдено " + numberOfFiles + " шт:");
+//                    //Выводим красивый список подходящих файлов
+//                    for (int i = 0; i < numberOfFiles; i++) {
+//                        System.out.print(i + 1 + ". ");
+//                        System.out.print(fileListString[i] + "\n");
+//                    }
+
                     //Снова запрашиваем часть имени или номер файла из списка
-                    System.out.println("\n" + "Введите название или номер файла в списке:");
-                    String fileName2 = in.nextLine();
-
-                    File[] matchingFiles2 = folder.listFiles(new FilenameFilter() {
-                        @Override
-                        public boolean accept(File dir, String name) {
-                            return name.contains(fileName2);
-                        }
-                    });
-                    if (matchingFiles2.length == 0) {
+                    System.out.println("\n" + "Введите номер файла в списке:");
+                    int fileName2 = in.nextInt();
+//                    File[] matchingFiles2 = folder.listFiles(new FilenameFilter() {
+//                        @Override
+//                        public boolean accept(File dir, String name) {
+//                            return name.contains(fileName2);
+//                        }
+//                    });
+                    if (fileName2 > matchingFilesCounter) {
                         System.out.println("Файл не найден, попробуйте ещё раз.");
-                        break;
-                    } else if (matchingFiles2.length == 1) {//Если нашли только один подходящий файл - приступаем к поиску слова
-                        System.out.println("Введите слово для поиска: ");
-
-
-
+//                        continue;
                     }
+                    counter = 0;
+                    numberOfFiles = 0;
+                    finalFileNumber = 0;
+                    for (String id : fileListString) {
+                        counter++;
+                        if (id.contains(Integer.toString(fileName2))) {
+                            System.out.println("Вы выбрали файл " + fileListString[counter - 1]);
+                            numberOfFiles++;
+                            finalFileNumber = counter;
+                        }
+                    }
+                    File finalFile = new File(String.valueOf(fileList[finalFileNumber - 1]));
+                    String finalFileName = finalFile.getName();
+
+
+                    break;
+                }
+            }
+            if (numberOfFiles == 1) { //Если нашли только один подходящий файл - приступаем к поиску слова
+                File finalFile = new File(String.valueOf(fileList[finalFileNumber - 1]));
+//                String finalFileName = finalFile.getName();
+
+                System.out.println("\n" + "Введите слово для поиска: ");
+                Scanner word = new Scanner(System.in);
+                word.nextLine();
+                Scanner scanner = null;
+                try {
+                    scanner = new Scanner(finalFile);
+                    int lineCount = 0;
+                    while (scanner.hasNextLine()) {
+                        if (word.equals(scanner.nextLine().trim())) { //Никак не может проверить наличие слова в строке!
+                            lineCount++;
+                            System.out.println(scanner);
+                            continue;
+                        } else {
+//                            System.out.println("Найдено " + lineCount + " строк с указанным словом.");
+                            continue;
+                        }
+                    }
+                } catch (IOException e) {
+                    System.out.println("Ошибка при чтении файла: " + e.getMessage());
                 }
 
-            } else { //Если подходящих файлов не нашли, т.е. 0
-                System.out.println("Файл не найден");
+//                        Scanner wordSearch = new Scanner();
+
+//                        String[] words = new String[];
+
+            } else if (numberOfFiles == 0) { //Если не нашли подходящих файлов
+                System.out.println("Файл не найден, попробуйте ещё раз.");
             }
         } else {
             System.out.println("В папке нет файлов. Добавьте файлы и повторите попытку");
         }
-
-
     }
 }
