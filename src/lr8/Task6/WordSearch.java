@@ -104,7 +104,7 @@ public class WordSearch {
                     scanner = new Scanner(finalFile);
                     int lineCount = 0;
                     while (scanner.hasNextLine()) {
-                        if (word.equals(scanner.nextLine().trim())) { //Никак не может проверить наличие слова в строке!
+                        if (word.equals(scanner.nextLine().split(" ", 0))) { //Никак не может проверить наличие слова в строке!
                             lineCount++;
                             System.out.println(scanner);
                             continue;
@@ -116,11 +116,6 @@ public class WordSearch {
                 } catch (IOException e) {
                     System.out.println("Ошибка при чтении файла: " + e.getMessage());
                 }
-
-//                        Scanner wordSearch = new Scanner();
-
-//                        String[] words = new String[];
-
             } else if (numberOfFiles == 0) { //Если не нашли подходящих файлов
                 System.out.println("Файл не найден, попробуйте ещё раз.");
             }

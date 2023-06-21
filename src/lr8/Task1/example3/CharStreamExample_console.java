@@ -1,17 +1,23 @@
 package lr8.Task1.example3;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 public class CharStreamExample_console {
     public static void main(String[] args) {
+        String fileName = "src/lr8/Task1/example3/example_file.txt";
+        String data;
+
+        //Чтение данных с консоли
+        try (BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in))) {
+            System.out.println("Введите данные для записи в файл:");
+            data = consoleReader.readLine();
+            System.out.println("Полученные данные: " + data);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         //Запись данных в файл
-        String fileName = "src/lr8/example3/example_file.txt";
-        Scanner in = new Scanner(System.in);
-        String data = in.nextLine();
         try (FileWriter writer = new FileWriter(fileName)) {
             writer.write(data);
             System.out.println("Данные записаны в файл: " + fileName);
@@ -19,7 +25,7 @@ public class CharStreamExample_console {
             System.out.println("Ошибка записи в файл: " + e.getMessage());
         }
 
-        //Чтение данных аз файла
+        //Чтение данных из файла
         try (FileReader reader = new FileReader(fileName)) {
             char[] buffer = new char[1024];
             int charRead = reader.read(buffer);

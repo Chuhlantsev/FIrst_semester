@@ -1,16 +1,18 @@
-package lr8.Task1.example4;
+package lr8.Task7;
 
 import java.io.*;
 import java.util.Scanner;
 
-public class BufferedStreamExample_console {
+public class FileFiller {
     public static void main(String[] args) {
-        String fileName = "src/lr8/Task1/example4/example_file.txt";
+        Scanner in = new Scanner(System.in);
+        System.out.println("Введите имя файла:");
+        String fileName = "src/lr8/Task7/" + in.nextLine();
         String data;
 
         //Чтение данных с консоли
         try (BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in))) {
-            System.out.println("Введите данные для записи в файл:");
+            System.out.println("Введите текст для записи в файл:");
             data = consoleReader.readLine();
             System.out.println("Полученные данные: " + data);
         } catch (IOException e) {
@@ -26,11 +28,12 @@ public class BufferedStreamExample_console {
         }
 
         //Чтение данных из файла
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+        try (FileReader reader = new FileReader(fileName)) {
             char[] buffer = new char[1024];
             int charRead = reader.read(buffer);
             String readData = new String(buffer, 0, charRead);
             System.out.println("Прочитанные данные: " + readData);
+            System.out.println("Количество символов: " + charRead);
         } catch (IOException e) {
             System.out.println("Ошибка при чтении файла: " + e.getMessage());
         }
@@ -43,3 +46,8 @@ public class BufferedStreamExample_console {
         }
     }
 }
+
+// Создайте приложение, которое будет запрашивать у пользователя название файла и текст,
+// который нужно записать в этот файл.
+// После записи текста в файл программа должна выводить на экран количество
+// записанных символов.

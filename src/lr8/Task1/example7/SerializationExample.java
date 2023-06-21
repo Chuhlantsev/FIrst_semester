@@ -16,7 +16,7 @@ public class SerializationExample {
             out.writeObject(person);
             out.close();
             fileOut.close();
-            System.out.println("Serialized data is saved in person.ser");
+            System.out.println("Serialized data is saved in person.json");
         } catch (IOException e) {
             e.printStackTrace();
         }

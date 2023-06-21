@@ -7,9 +7,10 @@ import java.io.IOException;
 
 public class CharStreamExample {
     public static void main(String[] args) {
-        //Запись данных в файл
         String fileName = "src/lr8/example3/example_file.txt";
         String data = "Это данные для записи в файл";
+
+        //Запись данных в файл
         try (FileWriter writer = new FileWriter(fileName)) {
             writer.write(data);
             System.out.println("Данные записаны в файл: " + fileName);
