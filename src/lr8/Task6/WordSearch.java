@@ -97,21 +97,28 @@ public class WordSearch {
 //                String finalFileName = finalFile.getName();
 
                 System.out.println("\n" + "Введите слово для поиска: ");
-                Scanner word = new Scanner(System.in);
-                word.nextLine();
+                Scanner w = new Scanner(System.in);
+
+                String word = w.nextLine();
+                word.replace("\n", "");
                 Scanner scanner = null;
                 try {
                     scanner = new Scanner(finalFile);
                     int lineCount = 0;
                     while (scanner.hasNextLine()) {
-                        if (word.equals(scanner.nextLine().split(" ", 0))) { //Никак не может проверить наличие слова в строке!
-                            lineCount++;
-                            System.out.println(scanner);
-                            continue;
-                        } else {
-//                            System.out.println("Найдено " + lineCount + " строк с указанным словом.");
-                            continue;
+                        String arrayString[] = scanner.nextLine().split(" ", 0);
+                        for (int i = 0; i < arrayString.length; i++) {
+                            if (word.equals(arrayString[i])) { //Никак не может проверить наличие слова в строке!
+                                lineCount++;
+                                System.out.println(scanner);
+                                continue;
+                            } else {
+                                lineCount = 0;
+                                System.out.println("Найдено " + lineCount + " строк с указанным словом.");
+                                continue;
+                            }
                         }
+
                     }
                 } catch (IOException e) {
                     System.out.println("Ошибка при чтении файла: " + e.getMessage());
