@@ -11,10 +11,10 @@ public class CocktailsJSONParser {
         try {
             JSONParser parser = new JSONParser();
             Object obj = parser
-                    .parse(new FileReader("C:\\Users\\Dezmo\\Desktop\\Cocktails\\Коктейли.json"));
+                    .parse(new FileReader("C:\\Users\\chuhlantsev\\Desktop\\lvl1.json"));
             JSONObject jsonObject1 = (JSONObject) obj;
-//            System.out.println("Корневой элемент: "
-//                    + jsonObject.keySet().iterator().next());
+            System.out.println("Корневой элемент: "
+                    + jsonObject1.keySet().iterator().next());
             JSONObject jsonObject2 = (JSONObject) jsonObject1.get("Data");
             JSONArray jsonArray = (JSONArray) jsonObject2.get("Rows");
 
