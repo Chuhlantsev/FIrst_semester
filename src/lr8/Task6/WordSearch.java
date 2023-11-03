@@ -108,13 +108,19 @@ public class WordSearch {
                     while (scanner.hasNextLine()) {
                         String arrayString[] = scanner.nextLine().split(" ", 0);
                         for (int i = 0; i < arrayString.length; i++) {
-                            if (word.equals(arrayString[i])) { //Никак не может проверить наличие слова в строке!
+                            if (word.equalsIgnoreCase(arrayString[i].replaceAll(",", "") //Проверяем, содержится ли слово в строке, игнорируя регистр и убирая лишние символы
+                                    .replaceAll("\\.", "")
+                                    .replaceAll(":","")
+                                    .replaceAll("\\?","")
+                                    .replaceAll("!",""))) {
                                 lineCount++;
-                                System.out.println(scanner);
-                                continue;
+                                for (int j = 0; j < arrayString.length; j++) {
+                                    System.out.print(arrayString[j] + " ");
+                                }
+//                              System.out.println(arrayString.toString());
                             } else {
                                 lineCount = 0;
-                                System.out.println("Найдено " + lineCount + " строк с указанным словом.");
+//                              System.out.println("Найдено " + lineCount + " строк с указанным словом.");
                                 continue;
                             }
                         }
