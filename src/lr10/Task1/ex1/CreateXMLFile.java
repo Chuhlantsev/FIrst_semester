@@ -6,9 +6,12 @@ import org.w3c.dom.Element;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
+import java.util.Scanner;
 
 public class CreateXMLFile {
     public static void main(String[] args) {
@@ -53,6 +56,54 @@ public class CreateXMLFile {
             year2.appendChild(doc.createTextNode("1967"));
             book2.appendChild(year2);
 
+            boolean is_New_Book_Needed = true;
+
+            while (is_New_Book_Needed) {
+
+                //Добавление книги от пользователя
+                Element bookFromUser = doc.createElement("book");
+                rootElement.appendChild(bookFromUser);
+
+                System.out.println("Укажите название книги:");
+                Scanner in1 = new Scanner(System.in);
+                String titleInput = in1.nextLine();
+
+                Element titleFromUser = doc.createElement("title");
+                titleFromUser.appendChild(doc.createTextNode(titleInput));
+                bookFromUser.appendChild(titleFromUser);
+
+                System.out.println("Кто автор книги?");
+                Scanner in2 = new Scanner(System.in);
+                String authorInput = in2.nextLine();
+
+                Element authorFromUser = doc.createElement("author");
+                authorFromUser.appendChild(doc.createTextNode(authorInput));
+                bookFromUser.appendChild(authorFromUser);
+
+                System.out.println("В каком году вышла книга?");
+                Scanner in3 = new Scanner(System.in);
+                String yearInput = in3.nextLine();
+
+                Element yearFromUser = doc.createElement("year");
+                yearFromUser.appendChild(doc.createTextNode(yearInput));
+                bookFromUser.appendChild(yearFromUser);
+
+                System.out.println("Добавить ещё книгу? (Да/Нет)");
+                Scanner in4 = new Scanner(System.in);
+                String answer = in4.nextLine();
+
+                switch (answer) {
+                    case "Да":
+                        break;
+                    case "Нет":
+                        is_New_Book_Needed = false;
+                        break;
+                    default:
+                        System.out.println("Введён некорректный ответ. Добавьте следующую книгу.");
+                        break;
+                }
+            }
+
             //Запись xml-файла
             doc.setXmlStandalone(true);
             doc.normalizeDocument();
@@ -61,8 +112,8 @@ public class CreateXMLFile {
             transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
             transformer.setOutputProperty(OutputKeys.STANDALONE, "yes");
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            javax.xml.transform.dom.DOMSource source = new DOMSource(doc);
-            javax.xml.transform.stream.StreamResult result =
+            DOMSource source = new DOMSource(doc);
+            StreamResult result =
                     new StreamResult(new File("src/lr10/Task1/ex1/example.xml"));
             transformer.transform(source, result);
 
